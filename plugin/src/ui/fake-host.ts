@@ -418,7 +418,7 @@ export class FakeHost implements PanelHost {
     ];
     const cli = checks.find((c) => c.id === "cli");
     if (cli && !cli.ok) {
-      cli.fix = { label: "Install zotero-cli", run: () => this.runFix("cli", ["$ uv tool install zotero-mcp-server", "Resolved 14 packages in 412ms", "Installed 1 executable: zotero-cli"]) };
+      cli.fix = { label: "Install zotero-cli", run: () => this.runFix("cli", ["$ uv tool install git+https://github.com/quang1852004-notabot/zotero-mcp.git", "Resolved 14 packages in 412ms", "Installed 1 executable: zotero-cli"]) };
     }
     return checks;
   }

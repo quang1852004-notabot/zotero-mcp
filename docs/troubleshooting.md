@@ -86,4 +86,4 @@ Stop any running zotero-mcp server (quit the MCP client that started it) before 
 - **Update command fails**: Check your internet connection and try `zotero-mcp update --force`
 - **Configuration lost after update**: The update process preserves configs automatically, but check `~/.config/zotero-mcp/` for backup files
 
-For more help, try the [discussions](https://github.com/54yyyu/zotero-mcp/discussions) or the [Discord](https://discord.gg/BvgjbcBUqg).
+For more help, try the [discussions](https://github.com/quang1852004-notabot/zotero-mcp/discussions) or the [Discord](https://discord.gg/BvgjbcBUqg).

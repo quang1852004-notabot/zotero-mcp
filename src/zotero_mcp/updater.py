@@ -307,27 +307,14 @@ def _uv_tool_reinstall_command(receipt: dict[str, Any]) -> list[str]:
 
 
 def get_latest_version() -> str | None:
-    """Get the latest version from PyPI (with GitHub releases as fallback)."""
+    """Get the latest release from this repository."""
     if not requests:
         logger.warning("requests library not available, cannot check for updates")
         return None
 
-    # Try PyPI first
     try:
         response = requests.get(
-            "https://pypi.org/pypi/zotero-mcp-server/json",
-            timeout=10
-        )
-        if response.status_code == 200:
-            data = response.json()
-            return data.get("info", {}).get("version")
-    except Exception as e:
-        logger.warning(f"Could not fetch latest version from PyPI: {e}")
-
-    # Fallback to GitHub releases
-    try:
-        response = requests.get(
-            "https://api.github.com/repos/54yyyu/zotero-mcp/releases/latest",
+            "https://api.github.com/repos/quang1852004-notabot/zotero-mcp/releases/latest",
             timeout=10
         )
         if response.status_code == 200:
@@ -497,132 +484,12 @@ def restore_configurations(backup_dir: Path) -> bool:
 
 
 def update_via_method(method: str, force: bool = False) -> tuple[bool, str]:
-    """
-    Update zotero-mcp using the specified method.
-
-    Args:
-        method: Installation method ('pip', 'uv', 'conda', 'pipx')
-        force: Force update even if already latest
-
-    Returns:
-        Tuple of (success, message)
-    """
-    package_name = "zotero-mcp-server"
-
-    try:
-        if method == "uv":
-            if _is_uv_tool_installation():
-                before = get_current_version()
-                try:
-                    receipt = _read_uv_tool_receipt()
-                    receipt_error = None
-                except ReceiptError as e:
-                    receipt, receipt_error = None, str(e)
-
-                if receipt and _is_exact_pin(receipt["specifier"]):
-                    # `uv tool upgrade` resolves against the specifier recorded
-                    # at install time, so an exact pin can never move.
-                    if sys.platform == "win32":
-                        return False, _windows_reinstall_message(
-                            receipt,
-                            f"`uv tool upgrade` cannot move a uv tool pinned to '{receipt['specifier']}'",
-                        )
-                    print(
-                        f"uv tool receipt pins zotero-mcp-server to '{receipt['specifier']}'; "
-                        "reinstalling at @latest instead of upgrading."
-                    )
-                    cmd = _uv_tool_reinstall_command(receipt)
-                else:
-                    upgrade_result = subprocess.run(
-                        ["uv", "tool", "upgrade", "zotero-mcp-server"],
-                        capture_output=True,
-                        text=True,
-                        timeout=300,
-                    )
-                    if upgrade_result.returncode != 0:
-                        return False, f"Update failed: {upgrade_result.stderr}"
-
-                    # Exit 0 also covers "Nothing to upgrade". Only a changed
-                    # version on disk counts as an upgrade.
-                    after = get_installed_version(python=_uv_tool_python())
-                    if after is None:
-                        return False, (
-                            "`uv tool upgrade` ran but the installed version could not be read "
-                            "afterwards; run 'zotero-mcp version' to check"
-                        )
-                    if before is None or is_newer_version(before, after):
-                        return True, "Updated successfully via uv tool"
-
-                    # A no-op. Reinstalling at @latest discards whatever the
-                    # receipt says, so only do it when the receipt is known
-                    # and unconstrained.
-                    manual = "uv tool install --force 'zotero-mcp-server[all]@latest'"
-                    if receipt is None:
-                        why = receipt_error or "no uv tool receipt found for zotero-mcp-server"
-                        return False, (
-                            f"`uv tool upgrade` changed nothing and the uv tool receipt could not "
-                            f"be used ({why}); reinstall by hand, e.g. {manual}"
-                        )
-                    if receipt["specifier"]:
-                        return False, (
-                            f"`uv tool upgrade` changed nothing: the uv tool receipt constrains "
-                            f"zotero-mcp-server to '{receipt['specifier']}', which excludes newer "
-                            f"releases. Reinstall by hand with a wider constraint, e.g. {manual}"
-                        )
-                    if sys.platform == "win32":
-                        return False, _windows_reinstall_message(receipt, "`uv tool upgrade` changed nothing")
-                    print("`uv tool upgrade` changed nothing; reinstalling at @latest.")
-                    cmd = _uv_tool_reinstall_command(receipt)
-            else:
-                cmd = ["uv", "pip", "install", "--upgrade", package_name]
-        elif method == "pip":
-            cmd = [sys.executable, "-m", "pip", "install", "--upgrade", package_name]
-        elif method == "conda":
-            # Use pip within conda environment
-            cmd = [sys.executable, "-m", "pip", "install", "--upgrade", package_name]
-        elif method == "pipx":
-            # First try to upgrade, if that fails, reinstall
-            try:
-                result = subprocess.run(
-                    ["pipx", "upgrade", "zotero-mcp-server"],
-                    capture_output=True,
-                    text=True,
-                    timeout=300
-                )
-                if result.returncode == 0:
-                    return True, "Updated successfully via pipx"
-            except Exception:
-                pass
-
-            # Fall back to reinstall
-            cmd = ["pipx", "install", "--force", package_name]
-        else:
-            return False, f"Unknown installation method: {method}"
-
-        if (
-            force
-            and method != "pipx"
-            and cmd[:3] != ["uv", "tool", "install"]
-        ):
-            cmd.append("--force-reinstall")
-
-        print(f"Running: {' '.join(cmd)}")
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            timeout=300
-        )
-
-        if result.returncode == 0:
-            return True, f"Successfully updated via {method}"
-        else:
-            return False, f"Update failed: {result.stderr}"
-
-    except subprocess.TimeoutExpired:
-        return False, "Update timed out"
-    except Exception as e:
-        return False, f"Update error: {str(e)}"
+    """Keep updates on this project's release channel until it has its own package."""
+    return False, (
+        "Automatic installation updates are unavailable for this source build. "
+        "Install a reviewed release from https://github.com/quang1852004-notabot/zotero-mcp/releases "
+        "using its source checkout."
+    )
 
 
 def _windows_reinstall_message(receipt: dict[str, Any], reason: str) -> str:
@@ -719,7 +586,10 @@ def update_zotero_mcp(check_only: bool = False,
     result["latest_version"] = latest_version
 
     if not latest_version:
-        result["message"] = "Could not check for latest version"
+        result["message"] = (
+            "No release is available yet at "
+            "https://github.com/quang1852004-notabot/zotero-mcp/releases"
+        )
         return result
 
     # Check if update is needed. Only a strictly newer release counts — a

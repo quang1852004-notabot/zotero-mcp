@@ -55,11 +55,11 @@ export function installCli(spawner: Spawner, maxMs?: number): () => AsyncIterabl
       uv = code === 0 ? await findBinary(spawner, env, "uv", localBin(env)) : null;
     }
     const attempts: [string, string[]][] = [];
-    if (uv) attempts.push([uv, ["tool", "install", "--upgrade", "zotero-mcp-server"]]);
+    if (uv) attempts.push([uv, ["tool", "install", "--upgrade", "git+https://github.com/quang1852004-notabot/zotero-mcp.git"]]);
     const pipx = await findBinary(spawner, env, "pipx");
-    if (pipx) attempts.push([pipx, ["install", "--force", "zotero-mcp-server"]]);
+    if (pipx) attempts.push([pipx, ["install", "--force", "git+https://github.com/quang1852004-notabot/zotero-mcp.git"]]);
     const py = await findBinary(spawner, env, "python3");
-    if (py) attempts.push([py, ["-m", "pip", "install", "--user", "--upgrade", "zotero-mcp-server"]]);
+    if (py) attempts.push([py, ["-m", "pip", "install", "--user", "--upgrade", "git+https://github.com/quang1852004-notabot/zotero-mcp.git"]]);
     if (!attempts.length) {
       yield "No installer found. Install uv (https://docs.astral.sh/uv/), then try again.";
       return;

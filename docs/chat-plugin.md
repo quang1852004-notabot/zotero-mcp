@@ -6,7 +6,7 @@ The agent is not restricted by the panel: it can search the web, run shell comma
 
 ## Install
 
-You need Zotero 7 or newer (developed and tested on Zotero 10), [`zotero-cli`](cli.md) on your PATH (`uv tool install zotero-mcp-server`), and Node.js. The plugin ships inside the `zotero-mcp-server` wheel:
+You need Zotero 7 or newer (developed and tested on Zotero 10), [`zotero-cli`](cli.md) on your PATH (`uv tool install git+https://github.com/quang1852004-notabot/zotero-mcp.git`), and Node.js. The plugin ships inside the `zotero-mcp-server` wheel:
 
 ```bash
 zotero-cli plugin           # where the .xpi is, and how to install it
@@ -14,17 +14,17 @@ zotero-cli plugin --path    # just the path, for scripts
 zotero-cli plugin --reveal  # also show the file in your file manager
 ```
 
-In Zotero: **Tools > Plugins**, click the gear, **Install Plugin From File**, and choose that file. The plugin updates itself from `plugin/updates.json` in this repository. You can also download `zotero-agent.xpi` from the [GitHub release](https://github.com/54yyyu/zotero-mcp/releases/latest).
+In Zotero: **Tools > Plugins**, click the gear, **Install Plugin From File**, and choose that file. The update manifest belongs to this repository. It contains no update entry until an independent plugin release is built and its hash recorded. You can also download `zotero-agent.xpi` from the [GitHub release](https://github.com/quang1852004-notabot/zotero-mcp/releases/latest) once one exists.
 
 ### Let your agent do it
 
 Paste this to Claude Code, Codex, pi or any other agent that has a shell:
 
 ```text
-Install the Zotero Agent plugin for me. Make sure zotero-cli is installed (`uv tool install zotero-mcp-server`,
-or `pipx install zotero-mcp-server`), then run `zotero-cli plugin --reveal`: it prints the path of zotero-agent.xpi
+Install the Zotero Agent plugin for me. Make sure zotero-cli is installed (`uv tool install git+https://github.com/quang1852004-notabot/zotero-mcp.git`,
+or `pipx install git+https://github.com/quang1852004-notabot/zotero-mcp.git`), then run `zotero-cli plugin --reveal`: it prints the path of zotero-agent.xpi
 and shows it in my file manager. If it says the file is missing, download
-https://github.com/54yyyu/zotero-mcp/releases/latest/download/zotero-agent.xpi instead. Zotero cannot install a
+https://github.com/quang1852004-notabot/zotero-mcp/releases/latest/download/zotero-agent.xpi instead. Zotero cannot install a
 plugin from the command line, so finish by telling me the one step I do myself: in Zotero, Tools > Plugins, the
 gear, Install Plugin From File, and choose that file.
 ```

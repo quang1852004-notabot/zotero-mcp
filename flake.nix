@@ -90,7 +90,7 @@
             pythonImportsCheck = [ "zotero_mcp" ];
             meta = {
               description = "Zotero MCP server and CLI";
-              homepage = "https://github.com/54yyyu/zotero-mcp";
+              homepage = "https://github.com/quang1852004-notabot/zotero-mcp";
               mainProgram = "zotero-mcp";
             };
           };

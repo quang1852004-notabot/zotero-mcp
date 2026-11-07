@@ -26,7 +26,7 @@ html_re = re.compile(r"<.*?>")
 #: it without an import cycle. Several outbound clients still send no UA at
 #: all (OpenAlex, Unpaywall, Semantic Scholar, PMC, arXiv, scite, GitHub);
 #: converting those is worth doing and is not done here.
-USER_AGENT = "zotero-mcp/1.0 (+https://github.com/54yyyu/zotero-mcp)"
+USER_AGENT = "zotero-mcp/1.0 (+https://github.com/quang1852004-notabot/zotero-mcp)"
 
 # Distribution name on PyPI, used to build install/upgrade hints.
 PACKAGE_NAME = "zotero-mcp-server"

@@ -121,10 +121,11 @@ class TestUpdateManifest:
 
     def test_addon_points_at_the_committed_manifest(self):
         assert self.addon["updateUrl"].endswith("/main/plugin/updates.json")
-        assert self.addon["updateUrl"].startswith("https://raw.githubusercontent.com/54yyyu/zotero-mcp/")
+        assert self.addon["updateUrl"].startswith("https://raw.githubusercontent.com/quang1852004-notabot/zotero-mcp/")
 
     def test_manifest_is_for_the_addon_id(self):
         assert list(self.updates["addons"]) == [self.addon["id"]]
+        assert self.updates["addons"][self.addon["id"]]["updates"] == []
 
     def test_each_update_is_well_formed(self):
         for u in self.updates["addons"][self.addon["id"]]["updates"]:

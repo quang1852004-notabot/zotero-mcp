@@ -44,7 +44,7 @@ test("on a machine with nothing, uv is fetched first (leaving the shell profile 
   assert.match(ran[0]!.args.join(" "), /astral\.sh\/uv\/install\.sh/);
   assert.equal(ran[0]!.env["UV_NO_MODIFY_PATH"], "1", "the user's dotfiles are not edited");
   assert.equal(ran[1]!.cmd, "/Users/me/.local/bin/uv", "uv is found in ~/.local/bin even though the login PATH lacks it");
-  assert.deepEqual(ran[1]!.args, ["tool", "install", "--upgrade", "zotero-mcp-server"]);
+  assert.deepEqual(ran[1]!.args, ["tool", "install", "--upgrade", "git+https://github.com/quang1852004-notabot/zotero-mcp.git"]);
   assert.ok(lines.some((l) => /uv tool update-shell|terminal/.test(l)), "tells how to get zotero-cli into a terminal");
 });
 

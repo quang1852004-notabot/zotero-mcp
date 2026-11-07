@@ -48,7 +48,7 @@ VERSION_HOOKS = (
 )
 LEAD = '<article class="release lead">'
 RELEASES = '<div class="releases">\n'
-MAINTAINER = "54yyyu"  # own PRs are not credited
+MAINTAINER = "quang1852004-notabot"  # own PRs are not credited
 
 
 class SiteError(Exception):

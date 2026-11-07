@@ -13,6 +13,13 @@ import pytest
 from zotero_mcp import updater
 
 
+def test_source_build_never_installs_the_original_package(monkeypatch):
+    monkeypatch.setattr(updater.subprocess, "run", lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError("installer called")))
+    success, message = updater.update_via_method("uv")
+    assert not success
+    assert "quang1852004-notabot/zotero-mcp" in message
+
+
 class TestIsNewerVersion:
     @pytest.mark.parametrize(
         "current,latest,expected",

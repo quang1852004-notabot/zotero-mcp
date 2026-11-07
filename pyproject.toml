@@ -95,10 +95,10 @@ dev = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/54yyyu/zotero-mcp"
-"Bug Tracker" = "https://github.com/54yyyu/zotero-mcp/issues"
-"Documentation" = "https://stevenyuyy.com/zotero-mcp/"
-"Changelog" = "https://github.com/54yyyu/zotero-mcp/blob/main/CHANGELOG.md"
+"Homepage" = "https://github.com/quang1852004-notabot/zotero-mcp"
+"Bug Tracker" = "https://github.com/quang1852004-notabot/zotero-mcp/issues"
+"Documentation" = "https://github.com/quang1852004-notabot/zotero-mcp/tree/main/docs"
+"Changelog" = "https://github.com/quang1852004-notabot/zotero-mcp/blob/main/CHANGELOG.md"
 
 [project.scripts]
 zotero-cli = "zotero_mcp.cli_standalone:main"

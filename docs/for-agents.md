@@ -24,7 +24,7 @@ zotero-cli config                  # prints resolved settings, or fails if not i
 If not installed:
 
 ```bash
-uv tool install zotero-mcp-server  # or: pip install zotero-mcp-server
+uv tool install git+https://github.com/quang1852004-notabot/zotero-mcp.git  # or: pip install git+https://github.com/quang1852004-notabot/zotero-mcp.git
 zotero-mcp setup                   # interactive; configures Claude Desktop if present
 zotero-mcp install-skill           # teaches coding agents in this project to use zotero-cli
 ```

@@ -27,7 +27,7 @@ async function installerCommands(spawner: Spawner, env: Record<string, string>, 
   }
   add(await findBinary(spawner, env, "zotero-mcp"));
   const uv = await findBinary(spawner, env, "uv");
-  if (uv) add(uv, ["tool", "run", "--from", "zotero-mcp-server", "zotero-mcp"]);
+  if (uv) add(uv, ["tool", "run", "--from", "git+https://github.com/quang1852004-notabot/zotero-mcp.git", "zotero-mcp"]);
   return out;
 }
 

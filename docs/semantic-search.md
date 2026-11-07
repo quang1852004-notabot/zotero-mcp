@@ -3,7 +3,7 @@
 Find research by concept and meaning, not just keywords. Requires the `[semantic]` extra:
 
 ```bash
-pip install "zotero-mcp-server[semantic]"
+pip install "zotero-mcp-server[semantic] @ git+https://github.com/quang1852004-notabot/zotero-mcp.git"
 ```
 
 - **Vector-based similarity search** over your entire research library

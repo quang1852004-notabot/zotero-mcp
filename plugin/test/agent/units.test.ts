@@ -301,7 +301,7 @@ describe("workspace", () => {
     });
     await prepareWorkspace(second.spawner, "/data/ws");
     const uvCall = second.calls.find((c) => c.args.includes("install-skill"))!;
-    assert.deepEqual(uvCall.args.slice(0, 4), ["tool", "run", "--from", "zotero-mcp-server"]);
+    assert.deepEqual(uvCall.args.slice(0, 4), ["tool", "run", "--from", "git+https://github.com/quang1852004-notabot/zotero-mcp.git"]);
   });
 
   it("an absent installer is not fatal", async () => {

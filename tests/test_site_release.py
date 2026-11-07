@@ -123,4 +123,4 @@ def test_credits_from_merge_subjects():
     ]
     assert sr.credits_from_subjects(subjects) == (
         "With fixes from @falcon1-1-code (#689, #693 to #695) and @sghng (#684).")
-    assert sr.credits_from_subjects(["Merge pull request #1 from 54yyyu/x"]) == ""
+    assert sr.credits_from_subjects(["Merge pull request #1 from quang1852004-notabot/x"]) == ""

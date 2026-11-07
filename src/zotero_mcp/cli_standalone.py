@@ -1355,7 +1355,7 @@ def cmd_plugin(args):
     if xpi is None:
         _fail(args, "plugin",
               f"{name} is not built. Run `npm run build` in plugin/ of the zotero-mcp "
-              "repo, or download it from https://github.com/54yyyu/zotero-mcp/releases/latest",
+              "repo, or download it from https://github.com/quang1852004-notabot/zotero-mcp/releases/latest",
               "plugin_missing")
     if args.path:
         _out(args, "plugin", data={"path": str(xpi)}, text=str(xpi))
@@ -1366,7 +1366,7 @@ def cmd_plugin(args):
         f"Zotero Agent plugin: {xpi}\n"
         "Install it in Zotero: Tools > Plugins, click the gear, Install Plugin From File, "
         "and choose that file.\n"
-        "Setup and first run: https://github.com/54yyyu/zotero-mcp/blob/main/docs/chat-plugin.md"))
+        "Setup and first run: https://github.com/quang1852004-notabot/zotero-mcp/blob/main/docs/chat-plugin.md"))
 
 
 def _reader_url(attachment_key: str, *, page: int | None = None,
