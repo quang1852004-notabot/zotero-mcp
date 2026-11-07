@@ -1,4 +1,4 @@
-name: Build and publish to PyPI
+name: Test and build Zotero MCP
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true

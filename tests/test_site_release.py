@@ -115,7 +115,7 @@ def test_credits_from_merge_subjects():
     subjects = [
         "Merge #689: feat(toolsets): semantic search (#572) (#689, @falcon1-1-code)",
         "Merge pull request #684 from sghng: Voyage input_type",
-        "Merge pull request #690 from 54yyyu/maint/0.14.1",
+        "Merge pull request #690 from quang1852004-notabot/maint/0.14.1",
         "Merge fix/706-startup-update: run out of process (#706)",
         "Merge #693: fix(prompts): fall back (#693, @falcon1-1-code)",
         "Merge #694: fix(search): reject unknown fields (#694, @falcon1-1-code)",
